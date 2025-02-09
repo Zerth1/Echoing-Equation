@@ -241,9 +241,9 @@ while not window_should_close():
                 elif chosen_complexity == "Triangle":
                     to_add = pattern_expr.subs(index_symbol, custom_triangle(i + 1))
                 output_expr += to_add
-                print(str(i + 1) + " | Pattern: " + str(sympify(to_add)))
-                if i == int(math.ceil(settings_data["Addition"]["Gaps"] / 2)) - 1:
+                if i == int(settings_data["Addition"]["Gaps"] / 2) - 1:
                     hint_expr = sympify(output_expr)
+                print(str(i + 1) + " | Pattern: " + latex(str(sympify(to_add))))
             latex_to_png(latex(initial_expr), "input.png")
             latex_to_png(latex(collect(expand(hint_expr), primary_symbol)), "hint.png")        
             latex_to_png(latex(collect(expand(output_expr), primary_symbol)), "output.png")
@@ -294,9 +294,9 @@ while not window_should_close():
                 elif chosen_complexity == "Triangle":
                     to_multiply = pattern_expr.subs(index_symbol, custom_triangle(i + 1))
                 output_expr *= to_multiply
-                print(str(i + 1) + " | Pattern: " + str(sympify(to_multiply)))
-                if i == int(math.ceil(settings_data["Multiplication"]["Gaps"] / 2)) - 1:
+                if i == int(settings_data["Multiplication"]["Gaps"] / 2) - 1:
                     hint_expr = sympify(output_expr)
+                print(str(i + 1) + " | Pattern: " + latex(str(sympify(to_multiply))))
             latex_to_png(latex(initial_expr), "input.png")
             latex_to_png(latex(collect(expand(hint_expr), primary_symbol)), "hint.png")    
             latex_to_png(latex(collect(expand(output_expr), primary_symbol)), "output.png")
