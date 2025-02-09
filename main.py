@@ -164,14 +164,14 @@ def create_pattern_expr(remaining_terms: int, term_to_add: int, min_initial_degr
     if remaining_terms == 0:
         return expr_term
     if chosen_operation == "Add":
-        return expr_term + create_expr(remaining_terms - 1, min_initial_degree, max_initial_degree, degree_list)
+        return expr_term + create_pattern_expr(remaining_terms - 1, term_to_add, min_initial_degree, max_initial_degree, degree_list)
     elif chosen_operation == "Sub":
-        return expr_term - create_expr(remaining_terms - 1, min_initial_degree, max_initial_degree, degree_list)
+        return expr_term - create_pattern_expr(remaining_terms - 1, term_to_add, min_initial_degree, max_initial_degree, degree_list)
     elif chosen_operation == "Mul":
-        return expr_term * create_expr(remaining_terms - 1, min_initial_degree, max_initial_degree, degree_list)
+        return expr_term * create_pattern_expr(remaining_terms - 1, term_to_add, min_initial_degree, max_initial_degree, degree_list)
     elif chosen_operation == "Div":
         degree_list = list(range(min_initial_degree, max_initial_degree + 1))
-        return expr_term / create_expr(remaining_terms - 1, min_initial_degree, max_initial_degree, degree_list)   
+        return expr_term / create_pattern_expr(remaining_terms - 1, term_to_add, min_initial_degree, max_initial_degree, degree_list)   
 initial_expr = ""
 output_expr = ""
 input_texture = ""
@@ -223,6 +223,7 @@ while not window_should_close():
             hint_expr = None
             output_expr = initial_expr
             print(chosen_complexity)
+            print(pattern_expr)
             for i in range(settings_data["Addition"]["Gaps"]):
                 to_add = None
                 if chosen_complexity == "Identity":
@@ -275,6 +276,7 @@ while not window_should_close():
             hint_expr = None
             output_expr = initial_expr
             print(chosen_complexity)
+            print(pattern_expr)
             for i in range(settings_data["Multiplication"]["Gaps"]):
                 to_multiply = None
                 if chosen_complexity == "Identity":
