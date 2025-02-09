@@ -105,18 +105,22 @@ def custom_factorial(n: int):
         return 1
     return n * custom_factorial(n - 1)
 def is_prime(n: int):
+    if n == 2:
+        return True
     for i in range(int(math.sqrt(n))):
         if n % (i + 2) == 0:
             return False
     return True
 def custom_prime(n: int):
     primes_encountered = 0
+    if n == 1:
+        return 2
     i = 2
     while primes_encountered != n:
         if is_prime(i):
             primes_encountered += 1
         i += 1
-    return i
+    return i - 1
 def custom_exponential(n: int):
     return int(2 ** n)
 def custom_fibonacci(n: int):
