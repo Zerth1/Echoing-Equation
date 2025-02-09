@@ -240,7 +240,7 @@ while not window_should_close():
                 elif chosen_complexity == "Triangle":
                     to_add = pattern_expr.subs(index_symbol, custom_triangle(i + 1))
                 output_expr += to_add
-                print(str(i + 1) + " | Pattern: " + str(sympify(output_expr)))
+                print(str(i + 1) + " | Pattern: " + str(sympify(to_add)))
                 if i == int(math.ceil(settings_data["Addition"]["Gaps"] / 2)) - 1:
                     hint_expr = sympify(output_expr)
             latex_to_png(latex(initial_expr), "input.png")
