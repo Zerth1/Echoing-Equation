@@ -228,6 +228,9 @@ while not window_should_close():
             output_expr = initial_expr
             print(chosen_complexity)
             print(pattern_expr)
+            to_subtract = 0
+            if settings_data["Addition"]["Gaps"] % 2 == 0:
+                to_subtract = 1
             for i in range(settings_data["Addition"]["Gaps"]):
                 to_add = None
                 if chosen_complexity == "Identity":
@@ -245,7 +248,7 @@ while not window_should_close():
                 elif chosen_complexity == "Triangle":
                     to_add = pattern_expr.subs(index_symbol, custom_triangle(i + 1))
                 output_expr += to_add
-                if i == int(settings_data["Addition"]["Gaps"] / 2) - 1:
+                if i == int(settings_data["Addition"]["Gaps"] / 2) - to_subtract - 1:
                     hint_expr = sympify(output_expr)
                 print(str(i + 1) + " | Pattern: " + latex(str(sympify(to_add))))
             latex_to_png(latex(initial_expr), "input.png")
