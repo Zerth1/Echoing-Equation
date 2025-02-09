@@ -264,7 +264,6 @@ while not window_should_close():
             elif chosen_complexity == "Triangle":
                 to_add = pattern_expr.subs(index_symbol, custom_triangle(settings_data["Addition"]["Gaps"] + 1))
             missing_value = int((output_expr + to_add).subs(primary_symbol, 2).evalf())
-            print(str(i + 1) + " | Pattern: " + sympify(to_add))
             print(missing_value)
         elif chosen_gamemode == "Multiplication":
             evaluation_number = None
