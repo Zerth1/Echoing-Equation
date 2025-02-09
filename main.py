@@ -204,7 +204,6 @@ while not window_should_close():
     begin_drawing()
     clear_background(BLACK)
     if is_generating:
-        print("YEAH")
         gamemode_options = []
         if settings_data["Addition"]["Active"]:
             gamemode_options.append("Addition")
@@ -223,6 +222,7 @@ while not window_should_close():
             pattern_expr = create_pattern_expr(pattern_terms_left, random.randint(0, pattern_terms_left), settings_data["Addition"]["InitialDegreeMin"], settings_data["Addition"]["InitialDegreeMax"], list(range(settings_data["Addition"]["InitialDegreeMin"], settings_data["Addition"]["InitialDegreeMax"] + 1)))
             hint_expr = None
             output_expr = initial_expr
+            print(chosen_complexity)
             for i in range(settings_data["Addition"]["Gaps"]):
                 to_add = None
                 if chosen_complexity == "Identity":
@@ -240,6 +240,7 @@ while not window_should_close():
                 elif chosen_complexity == "Triangle":
                     to_add = pattern_expr.subs(index_symbol, custom_triangle(i + 1))
                 output_expr += to_add
+                print(str(i + 1) + " | Pattern: " + str(sympify(output_expr)))
                 if i == int(math.ceil(settings_data["Addition"]["Gaps"] / 2)) - 1:
                     hint_expr = sympify(output_expr)
             latex_to_png(latex(initial_expr), "input.png")
@@ -249,20 +250,21 @@ while not window_should_close():
             hint_texture = load_texture("hint.png")
             output_texture = load_texture("output.png")
             if chosen_complexity == "Identity":
-                to_add = pattern_expr.subs(index_symbol, settings_data["Addition"]["Gaps"])
+                to_add = pattern_expr.subs(index_symbol, settings_data["Addition"]["Gaps"] + 1)
             elif chosen_complexity == "Factorial":
-                to_add = pattern_expr.subs(index_symbol, custom_factorial(settings_data["Addition"]["Gaps"]))
+                to_add = pattern_expr.subs(index_symbol, custom_factorial(settings_data["Addition"]["Gaps"] + 1))
             elif chosen_complexity == "Prime":
-                to_add = pattern_expr.subs(index_symbol, custom_prime(settings_data["Addition"]["Gaps"]))
+                to_add = pattern_expr.subs(index_symbol, custom_prime(settings_data["Addition"]["Gaps"] + 1))
             elif chosen_complexity == "Exponential":
-                to_add = pattern_expr.subs(index_symbol, custom_exponential(settings_data["Addition"]["Gaps"]))
+                to_add = pattern_expr.subs(index_symbol, custom_exponential(settings_data["Addition"]["Gaps"] + 1))
             elif chosen_complexity == "Fibonacci":
-                to_add = pattern_expr.subs(index_symbol, custom_fibonacci(settings_data["Addition"]["Gaps"]))
+                to_add = pattern_expr.subs(index_symbol, custom_fibonacci(settings_data["Addition"]["Gaps"] + 1))
             elif chosen_complexity == "Square":
-                to_add = pattern_expr.subs(index_symbol, custom_square(settings_data["Addition"]["Gaps"]))
+                to_add = pattern_expr.subs(index_symbol, custom_square(settings_data["Addition"]["Gaps"] + 1))
             elif chosen_complexity == "Triangle":
-                to_add = pattern_expr.subs(index_symbol, custom_triangle(settings_data["Addition"]["Gaps"]))
+                to_add = pattern_expr.subs(index_symbol, custom_triangle(settings_data["Addition"]["Gaps"] + 1))
             missing_value = int((output_expr + to_add).subs(primary_symbol, 2).evalf())
+            print(str(settings_data[""]) + " | Pattern: " + sympify(to_add))
             print(missing_value)
         elif chosen_gamemode == "Multiplication":
             evaluation_number = None
@@ -273,6 +275,7 @@ while not window_should_close():
             pattern_expr = create_pattern_expr(pattern_terms_left, random.randint(0, pattern_terms_left), settings_data["Addition"]["InitialDegreeMin"], settings_data["Addition"]["InitialDegreeMax"], list(range(settings_data["Addition"]["InitialDegreeMin"], settings_data["Addition"]["InitialDegreeMax"] + 1)))
             hint_expr = None
             output_expr = initial_expr
+            print(chosen_complexity)
             for i in range(settings_data["Multiplication"]["Gaps"]):
                 to_multiply = None
                 if chosen_complexity == "Identity":
@@ -290,6 +293,7 @@ while not window_should_close():
                 elif chosen_complexity == "Triangle":
                     to_multiply = pattern_expr.subs(index_symbol, custom_triangle(i + 1))
                 output_expr *= to_multiply
+                print(str(i + 1) + " | Pattern: " + str(sympify(to_multiply)))
                 if i == int(math.ceil(settings_data["Multiplication"]["Gaps"] / 2)) - 1:
                     hint_expr = sympify(output_expr)
             latex_to_png(latex(initial_expr), "input.png")
@@ -299,19 +303,19 @@ while not window_should_close():
             hint_texture = load_texture("hint.png")
             output_texture = load_texture("output.png")
             if chosen_complexity == "Identity":
-                to_multiply = pattern_expr.subs(index_symbol, settings_data["Addition"]["Gaps"])
+                to_multiply = pattern_expr.subs(index_symbol, settings_data["Multiplication"]["Gaps"] + 1)
             elif chosen_complexity == "Factorial":
-                to_multiply = pattern_expr.subs(index_symbol, custom_factorial(settings_data["Addition"]["Gaps"]))
+                to_multiply = pattern_expr.subs(index_symbol, custom_factorial(settings_data["Multiplication"]["Gaps"] + 1))
             elif chosen_complexity == "Prime":
-                to_multiply = pattern_expr.subs(index_symbol, custom_prime(settings_data["Addition"]["Gaps"]))
+                to_multiply = pattern_expr.subs(index_symbol, custom_prime(settings_data["Multiplication"]["Gaps"] + 1))
             elif chosen_complexity == "Exponential":
-                to_multiply = pattern_expr.subs(index_symbol, custom_exponential(settings_data["Addition"]["Gaps"]))
+                to_multiply = pattern_expr.subs(index_symbol, custom_exponential(settings_data["Multiplication"]["Gaps"] + 1))
             elif chosen_complexity == "Fibonacci":
-                to_multiply = pattern_expr.subs(index_symbol, custom_fibonacci(settings_data["Addition"]["Gaps"]))
+                to_multiply = pattern_expr.subs(index_symbol, custom_fibonacci(settings_data["Multiplication"]["Gaps"] + 1))
             elif chosen_complexity == "Square":
-                to_multiply = pattern_expr.subs(index_symbol, custom_square(settings_data["Addition"]["Gaps"]))
+                to_multiply = pattern_expr.subs(index_symbol, custom_square(settings_data["Multiplication"]["Gaps"] + 1))
             elif chosen_complexity == "Triangle":
-                to_multiply = pattern_expr.subs(index_symbol, custom_triangle(settings_data["Addition"]["Gaps"]))
+                to_multiply = pattern_expr.subs(index_symbol, custom_triangle(settings_data["Multiplication"]["Gaps"] + 1))
             missing_value = int((output_expr * to_multiply).subs(primary_symbol, 1).evalf())
             print(missing_value)
     if is_settings:
